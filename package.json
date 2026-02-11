@@ -1,5 +1,5 @@
 {
-  "name": "@loveapp/mobile-platform-kit",
+  "name": "mobile-platform-kit",
   "version": "1.0.0",
   "description": "Переиспользуемый модуль для работы с Telegram, VK и браузером: safe areas, iOS scroll fixes, platform detection",
   "main": "dist/index.js",
@@ -30,6 +30,6 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
-    "typescript": "^4.9.0"
+    "typescript": "^5.3.0"
   }
 }
