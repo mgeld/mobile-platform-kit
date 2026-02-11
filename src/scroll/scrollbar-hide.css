@@ -1,0 +1,19 @@
+/**
+ * Скрывает скроллбары для всех браузеров
+ * Полезно для Mini Apps чтобы выглядело нативно
+ */
+
+/* Скрываем скроллбар для WebKit (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+    display: none;
+}
+
+/* Скрываем скроллбар для Firefox */
+* {
+    scrollbar-width: none;
+}
+
+/* Скрываем скроллбар для IE и старый Edge */
+* {
+    -ms-overflow-style: none;
+}

@@ -1,0 +1,37 @@
+/**
+ * Базовые CSS переменные для safe areas
+ * Использует env() как fallback для нативных safe areas
+ */
+
+:root {
+    --inset_top: env(safe-area-inset-top, 0px);
+    --inset_bottom: env(safe-area-inset-bottom, 0px);
+    --inset_left: env(safe-area-inset-left, 0px);
+    --inset_right: env(safe-area-inset-right, 0px);
+}
+
+/**
+ * Вспомогательные классы для применения safe areas
+ */
+.safe-top {
+    padding-top: var(--inset_top);
+}
+
+.safe-bottom {
+    padding-bottom: var(--inset_bottom);
+}
+
+.safe-left {
+    padding-left: var(--inset_left);
+}
+
+.safe-right {
+    padding-right: var(--inset_right);
+}
+
+.safe-all {
+    padding-top: var(--inset_top);
+    padding-bottom: var(--inset_bottom);
+    padding-left: var(--inset_left);
+    padding-right: var(--inset_right);
+}
