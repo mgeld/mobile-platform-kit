@@ -19,16 +19,31 @@ function detectPlatform() {
         window.location.hash.includes('vk_') ||
         !!window.AndroidBridge ||
         window.parent !== window;
-    // Проверяем Telegram через SDK
+    // Проверяем Telegram через URL параметры (работает всегда)
     let isTelegram = false;
-    try {
-        const lp = (0, sdk_1.retrieveLaunchParams)();
-        isTelegram = !isVK && lp.platform !== 'unknown';
-        console.log('📱 Launch params detected:', lp);
-    }
-    catch (e) {
-        console.log('ℹ️ Not in Telegram environment');
-        isTelegram = false;
+    if (!isVK) {
+        // Проверяем наличие tgWebApp параметров в URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const hashParams = new URLSearchParams(window.location.hash.slice(1));
+        const hasTgParams = urlParams.has('tgWebAppPlatform') ||
+            hashParams.has('tgWebAppPlatform') ||
+            urlParams.has('tgWebAppVersion') ||
+            hashParams.has('tgWebAppVersion');
+        if (hasTgParams) {
+            isTelegram = true;
+            console.log('📱 Telegram detected via URL parameters');
+        }
+        else {
+            // Fallback: пробуем retrieveLaunchParams (после инициализации SDK)
+            try {
+                const lp = (0, sdk_1.retrieveLaunchParams)();
+                isTelegram = lp.platform !== 'unknown';
+                console.log('📱 Telegram detected via SDK:', lp);
+            }
+            catch (e) {
+                console.log('ℹ️ Not in Telegram environment');
+            }
+        }
     }
     const platform = isTelegram ? 'telegram' : isVK ? 'vk' : 'browser';
     return {
