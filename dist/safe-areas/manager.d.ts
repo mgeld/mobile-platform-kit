@@ -15,6 +15,7 @@ export declare class SafeAreasManager {
     updateInsets(): Promise<SafeAreaInsets>;
     /**
      * Применяет safe area insets к CSS переменным
+     * Для Telegram добавляет дополнительный отступ сверху +20px
      */
     private applyCSSVars;
     /**

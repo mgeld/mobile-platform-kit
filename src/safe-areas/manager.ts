@@ -53,10 +53,15 @@ export class SafeAreasManager {
   
   /**
    * Применяет safe area insets к CSS переменным
+   * Для Telegram добавляет дополнительный отступ сверху +20px
    */
   private applyCSSVars(): void {
     const style = document.documentElement.style;
-    style.setProperty('--inset_top', `${this.currentInsets.top}px`);
+    
+    // Для Telegram добавляем +20px к верхнему отступу (как в test проекте)
+    const topOffset = this.platform === 'telegram' ? this.currentInsets.top + 20 : this.currentInsets.top;
+    
+    style.setProperty('--inset_top', `${topOffset}px`);
     style.setProperty('--inset_bottom', `${this.currentInsets.bottom}px`);
     style.setProperty('--inset_left', `${this.currentInsets.left}px`);
     style.setProperty('--inset_right', `${this.currentInsets.right}px`);
