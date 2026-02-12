@@ -24,18 +24,7 @@ export async function initializeTelegram(
   try {
     console.log('📱 Initializing Telegram SDK...');
     
-    // Отправляем события до инициализации SDK
-    if (options.expand !== false) {
-      postEvent('web_app_expand');
-      console.log('✅ WebApp expanded');
-    }
-    
-    if (options.disableVerticalSwipe !== false) {
-      postEvent('web_app_setup_swipe_behavior', { allow_vertical_swipe: false });
-      console.log('✅ Vertical swipe disabled');
-    }
-    
-    // Инициализируем SDK
+    // ВАЖНО: Сначала инициализируем SDK
     await init();
     console.log('✅ Telegram SDK initialized');
     
@@ -46,6 +35,17 @@ export async function initializeTelegram(
     // Привязываем CSS переменные viewport
     bindViewportCssVars();
     console.log('✅ Viewport CSS vars bound');
+    
+    // Теперь отправляем события (после init)
+    if (options.expand !== false) {
+      postEvent('web_app_expand');
+      console.log('✅ WebApp expanded');
+    }
+    
+    if (options.disableVerticalSwipe !== false) {
+      postEvent('web_app_setup_swipe_behavior', { allow_vertical_swipe: false });
+      console.log('✅ Vertical swipe disabled');
+    }
     
     return { 
       success: true, 
