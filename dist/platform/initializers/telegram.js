@@ -17,16 +17,7 @@ const sdk_1 = require("@telegram-apps/sdk");
 async function initializeTelegram(options = {}) {
     try {
         console.log('📱 Initializing Telegram SDK...');
-        // Отправляем события до инициализации SDK
-        if (options.expand !== false) {
-            (0, sdk_1.postEvent)('web_app_expand');
-            console.log('✅ WebApp expanded');
-        }
-        if (options.disableVerticalSwipe !== false) {
-            (0, sdk_1.postEvent)('web_app_setup_swipe_behavior', { allow_vertical_swipe: false });
-            console.log('✅ Vertical swipe disabled');
-        }
-        // Инициализируем SDK
+        // ВАЖНО: Сначала инициализируем SDK
         await (0, sdk_1.init)();
         console.log('✅ Telegram SDK initialized');
         // Монтируем viewport
@@ -35,6 +26,15 @@ async function initializeTelegram(options = {}) {
         // Привязываем CSS переменные viewport
         (0, sdk_1.bindViewportCssVars)();
         console.log('✅ Viewport CSS vars bound');
+        // Теперь отправляем события (после init)
+        if (options.expand !== false) {
+            (0, sdk_1.postEvent)('web_app_expand');
+            console.log('✅ WebApp expanded');
+        }
+        if (options.disableVerticalSwipe !== false) {
+            (0, sdk_1.postEvent)('web_app_setup_swipe_behavior', { allow_vertical_swipe: false });
+            console.log('✅ Vertical swipe disabled');
+        }
         return {
             success: true,
             platform: 'telegram'
