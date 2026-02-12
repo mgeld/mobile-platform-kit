@@ -23,9 +23,11 @@
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@telegram-apps/sdk": "^3.11.4",
+    "@vkontakte/vk-bridge": "^2.13.0"
+  },
   "peerDependencies": {
-    "@telegram-apps/sdk": "^3.0.0",
-    "@vkontakte/vk-bridge": "^2.0.0",
     "react": "^18.0.0"
   },
   "devDependencies": {
